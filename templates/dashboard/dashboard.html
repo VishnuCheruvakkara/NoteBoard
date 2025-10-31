@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Dashboard | NoteBoard{% endblock %}
+
+{% block content %}
+<section class="min-vh-100 py-5 nb-gradient-bg d-flex align-items-center justify-content-center">
+    <div class="container text-center">
+        <div class="card border-0 shadow-lg p-4 rounded-4 border-animate">
+            <h2 class="fw-bold text-primary mb-3">Welcome, {{ user.username }} 👋</h2>
+            <p class="text-muted mb-4">You’re now logged in to your NoteBoard dashboard.</p>
+
+            <div class="d-flex flex-column flex-md-row justify-content-center gap-3">
+                <a href="#" class="btn btn-primary btn-lg">Create a New Note</a>
+                <a href="#" class="btn btn-outline-primary btn-lg">View My Notes</a>
+                {% if user.is_authenticated %}
+                <form action="{% url 'logout' %}" method="post" class="d-inline">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-danger btn-sm">Logout</button>
+                </form>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

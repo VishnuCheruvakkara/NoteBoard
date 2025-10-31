@@ -15,3 +15,18 @@ body {
   color: white;
 }
 
+.ex-small {
+  font-size: 0.85rem !important;  /* use rem instead of px for responsiveness */
+  line-height: 1.6 !important;
+  margin-top: 3px !important;
+  color: #e72135 !important;
+  font-weight: 400; 
+}
+
+.just-validate-error-label {
+  font-size: 0.85rem !important; /* smaller */
+  color: #e72135 !important; /* your palette color */
+  margin-top: 3px;
+  display: block;
+  font-weight: 400;
+}

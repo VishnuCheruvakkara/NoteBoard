@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Login | NoteBoard{% endblock %}
+
+{% block content %}
+<section class="min-vh-100 d-flex align-items-center justify-content-center nb-login-section background-grid py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-sm-9 col-md-6 col-lg-4">
+        <div class="card shadow-lg border-0 rounded-4 p-4 p-md-3 signup-card border-animate">
+          <div class="text-center mb-4">
+            <h3 class="fw-bold text-primary mb-2">Welcome Back</h3>
+            <p class="text-muted small mb-0">Login to your NoteBoard account</p>
+          </div>
+
+          <form method="post" id="loginForm" novalidate>
+            {% csrf_token %}
+            {% for field in form %}
+            <div class="mb-3">
+              <label for="{{ field.id_for_label }}" class="form-label fw-semibold text-primary small">
+                {{ field.label }}
+              </label>
+              {{ field }}
+              {% for error in field.errors %}
+              <div class="text-danger ex-small">{{ error }}</div>
+              {% endfor %}
+            </div>
+            {% endfor %}
+
+            <div class="d-grid mt-3">
+              <button type="submit" class="btn btn-primary btn-lg" id="loginBtn">Login</button>
+            </div>
+          </form>
+
+          <div class="text-center mt-4">
+            <p class="text-muted mb-0 small">
+              Don’t have an account?
+              <a href="{% url 'register' %}" class="text-decoration-none fw-semibold text-primary">
+                Sign Up
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="{% static 'js/loginValidation.js' %}"></script>
+{% endblock %}
