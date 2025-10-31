@@ -1,0 +1,21 @@
+.nb-input {
+  border: 2px solid var(--nb-orange);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 0.95rem;
+  transition: all 0.3s ease-in-out;
+  background-color: #fff;
+}
+
+.nb-input:focus {
+  outline: none;
+  border-color: var(--nb-gold);
+  box-shadow: none;
+}
+
+.nb-input::placeholder {
+  color: #aaa;
+  font-size: 0.9rem;
+}
+
+

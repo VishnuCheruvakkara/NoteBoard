@@ -1,7 +1,9 @@
 @import url('variables.css');
 @import url('base.css');
+@import url('background-grid.css');
 @import url('navbar.css');
 @import url('buttons.css');
 @import url('cards.css');
 @import url('footer.css');
 @import url('animations.css');
+@import url('inputs.css');
