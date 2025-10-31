@@ -15,27 +15,3 @@ body {
   color: white;
 }
 
-
-.hero-section {
-    position: relative;
-    background: linear-gradient(135deg, rgba(255, 207, 113, 0.25), rgba(255, 157, 0, 0.15)); /* subtle gradient overlay */
-    overflow: hidden;
-}
-
-/* Grid pattern overlay */
-.hero-section::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image: 
-        linear-gradient(to right, rgba(0, 0, 0, 0.073) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(0, 0, 0, 0.073) 1px, transparent 1px);
-    background-size: 40px 40px; /* Adjust grid size */
-    z-index: 0;
-}
-
-/* Ensure the content stays above the grid */
-.hero-section .container {
-    position: relative;
-    z-index: 1;
-}
