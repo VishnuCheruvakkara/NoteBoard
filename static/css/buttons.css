@@ -1,0 +1,29 @@
+/* Buttons */
+.btn-primary {
+    background-color: var(--nb-orange) !important;
+    border-color: var(--nb-orange) !important;
+    color: #fff !important;
+    transition: all 0.3s ease-in-out !important;
+   
+}
+
+.btn-primary:hover {
+    background-color: var(--nb-yellow) !important;
+    border-color: var(--nb-dark) !important;
+    color:var(--nb-dark) !important;
+  
+}
+
+/* Outline Buttons */
+.btn-outline-primary {
+    color: var(--nb-dark) !important;
+    border-color: var(--nb-dark) !important;
+    transition: all 0.3s ease-in-out !important;
+   
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--nb-dark) !important;
+    color: #fff !important;
+   
+}

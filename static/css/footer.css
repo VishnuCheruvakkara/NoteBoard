@@ -1,0 +1,33 @@
+/* Footer spacing fix */
+footer {
+    background-color: var(--nb-dark) !important;
+    color: var(--nb-yellow) !important;
+}
+
+footer p {
+    margin: 0;
+}
+
+/* Social Icons */
+.social-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+  border-radius: 8px;
+  background-color: var(--nb-dark);
+  color: white;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+/* Hover effects using your color palette */
+.social-icon:hover {
+  background-color: var(--nb-orange);
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px var(--nb-gold);
+}

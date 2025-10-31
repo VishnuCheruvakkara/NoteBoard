@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} NoteBoard {% endblock %}</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <!-- Custom Theme -->
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+</head>
+
+<body class="bg-light">
+
+    <!-- Navbar -->
+    {% include 'includes/navbar.html' %}
+
+    <!-- Hero Section -->
+    <main>
+
+       {% block content%}
+       {% endblock %}
+
+    </main>
+
+
+    <!-- Footer -->
+    {% include 'includes/footer.html'%}
+
+    <!-- Bootstrap JS -->
+    <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <!-- custom JavaScript -->
+    <script src="{% static 'js/custom.js' %}"></script>
+    
+</body>
+
+</html>

@@ -1,0 +1,95 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block title %} Welcome to NoteBoard {% endblock %}
+
+
+{% block content %}
+<!-- Hero Section -->
+<section class="py-5 text-center hero-section ">
+    <div class="container ">
+        <div class="row align-items-center ">
+            <div class="col-md-6 mb-4 mb-md-0 text-center text-xl-start ">
+                <h1 class="display-5 fw-bold text-primary">Welcome to NoteBoard</h1>
+                <p class="lead text-muted mb-4">
+                    Organize your thoughts, store your ideas, and manage your notes easily.
+                    Create, edit, and delete notes anytime.
+                </p>
+
+                <div class="d-flex flex-column flex-xl-row align-items-center">
+                    <a href="{% url 'register' %}" class="btn btn-primary btn-lg px-4 mb-3 mb-xl-0 me-xl-3">
+                        Get Started
+                    </a>
+                    <a href="{% url 'login' %}" class="btn btn-outline-primary btn-lg px-4">
+                        Already have an account?
+                    </a>
+                </div>
+            </div>
+
+
+            <div class="col-md-6 text-center">
+                <img src="{% static 'images/hero-notes.svg' %}" class="img-fluid " alt="NoteBoard illustration">
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Features -->
+<section class="py-5 nb-gradient-bg">
+    <div class="container ">
+        <div class="row text-center">
+
+            <div class="col-md-4 mb-4">
+                <div class="card border-0 shadow h-100 border-animate p-2">
+                    <img src="{% static 'images/create-note.jpg' %}" class="img-fluid rounded-top-custom"
+                        alt="Create notes">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary fw-bold">
+                            <i class="bi bi-journal-check"></i>
+                            Create Notes
+                        </h5>
+                        <p class="card-text text-muted">
+                            Quickly create and save your ideas securely in one place.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="card border-0 shadow h-100 border-animate p-2">
+                    <img src="{% static 'images/edit-note.jpg' %}" class="img-fluid rounded-top-custom"
+                        alt="Edit notes">
+
+                    <div class="card-body">
+                        <h5 class="card-title text-primary fw-bold">
+                            <i class="bi bi-pencil-square"></i>
+                            Edit Anytime
+                        </h5>
+                        <p class="card-text text-muted">
+                            Update or organize your notes with an intuitive editor.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-4">
+                <div class="card border-0 shadow h-100 border-animate p-2">
+                    <img src="{% static 'images/manage-note.jpg' %}" class="img-fluid rounded-top-custom"
+                        alt="Manage notes">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary fw-bold">
+                            <i class="bi bi-clipboard-data"></i>
+                            Manage Easily
+                        </h5>
+                        <p class="card-text text-muted">
+                            Delete unwanted notes and keep your workspace clean.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,29 @@
+/* Navbar with glass blur effect */
+.custom-navbar {
+    background: linear-gradient(
+        135deg,
+        rgba(255, 157, 0, 0.75),   /* var(--nb-orange) with 75% opacity */
+        rgba(255, 207, 113, 0.75)  /* var(--nb-yellow) with 75% opacity */
+    );
+    backdrop-filter: blur(12px);           /* frosted glass blur */
+    -webkit-backdrop-filter: blur(12px);   /* Safari support */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 5px 0;                        /* vertical padding */
+    z-index: 1030;                         /* stays above content */
+}
+
+
+/* Navbar text and links */
+.navbar-brand,
+.navbar-nav .nav-link {
+    color: #fff !important;
+    transition: color 0.3s ease;
+}
+
+
+
+/* Optional: slightly enlarge brand text */
+.navbar-brand {
+    font-size: 1.3rem;
+    letter-spacing: 0.5px;
+}
