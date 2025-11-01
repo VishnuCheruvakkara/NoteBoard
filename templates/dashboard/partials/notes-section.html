@@ -1,0 +1,111 @@
+<!-- Notes Section -->
+<div class="notes-section">
+
+    {% comment %} Show search bar only if user has notes OR a search query exists {% endcomment %}
+    {% if notes or request.GET.q %}
+    <!-- Search Bar -->
+    <div class="row justify-content-center mb-4">
+        <div class="col-md-6">
+            <form class="d-flex" method="get" action="">
+                <input class="form-control form-control-lg me-2 nb-input"
+                       type="search" 
+                       name="q"
+                       placeholder="Search your notes..."
+                       aria-label="Search"
+                       value="{{ request.GET.q|default:'' }}">
+
+                <button class="btn btn-outline-primary btn-lg me-2" type="submit">
+                    <i class="bi bi-search"></i>
+                </button>
+
+                {% if request.GET.q %}
+                <a href="{% url 'list' %}" class="btn btn-outline-primary btn-lg">
+                    <i class="bi bi-x-lg"></i>
+                </a>
+                {% endif %}
+            </form>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Notes Cards -->
+    <div class="row g-4">
+        {% if notes %}
+            {% for note in notes %}
+            <div class="col-lg-3 col-md-6 col-12">
+                <div class="card shadow-sm border-0 h-100 note-card">
+                    <div class="card-body text-start border-animate">
+                        <h5 class="card-title fw-bold text-primary">{{ note.title }}</h5>
+                        <p class="card-text text-muted">
+                            {{ note.content|truncatewords:20 }}
+                        </p>
+                        <div class="d-flex justify-content-between mt-3">
+                            <a href="{% url 'detail' note.pk %}" class="text-decoration-none text-primary fw-semibold">
+                                View <i class="bi bi-arrow-right"></i>
+                            </a>
+                            <small class="text-muted">
+                                {{ note.created_at|date:"M d, Y" }}
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% elif request.GET.q %}
+            <!-- Only show this when search performed but no results -->
+            <div class="col-12 text-center p-5">
+                <p class="text-muted fs-5">No results found for "<strong>{{ request.GET.q }}</strong>"</p>
+            </div>
+        {% endif %}
+    </div>
+
+    {% if is_paginated and notes %}
+    <!-- Pagination -->
+    <nav aria-label="Notes Pagination" class="mt-5 nb-pagination">
+        <ul class="pagination justify-content-center">
+
+            <!-- Previous Page -->
+            {% if page_obj.has_previous %}
+            <li class="page-item">
+                <a class="page-link nb-page-link" 
+                   href="?q={{ request.GET.q }}&page={{ page_obj.previous_page_number }}">
+                    <i class="bi bi-chevron-left"></i>
+                </a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <span class="page-link nb-page-link"><i class="bi bi-chevron-left"></i></span>
+            </li>
+            {% endif %}
+
+            <!-- Page Numbers -->
+            {% for num in paginator.page_range %}
+                {% if num == page_obj.number %}
+                    <li class="page-item active">
+                        <span class="page-link nb-page-link active">{{ num }}</span>
+                    </li>
+                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                    <li class="page-item">
+                        <a class="page-link nb-page-link" href="?q={{ request.GET.q }}&page={{ num }}">{{ num }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+
+            <!-- Next Page -->
+            {% if page_obj.has_next %}
+            <li class="page-item">
+                <a class="page-link nb-page-link"
+                   href="?q={{ request.GET.q }}&page={{ page_obj.next_page_number }}">
+                    <i class="bi bi-chevron-right"></i>
+                </a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <span class="page-link nb-page-link"><i class="bi bi-chevron-right"></i></span>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
+
+</div>

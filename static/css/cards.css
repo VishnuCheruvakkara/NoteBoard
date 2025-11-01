@@ -67,3 +67,25 @@
   height: 150px; /* Uniform height */
   object-fit: cover;
 }
+
+/* Dashboard section note cards */
+.note-card {
+    transition: all 0.3s ease;
+    border-radius: 1rem;
+}
+
+.note-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 767px) {
+    .note-card {
+        margin-bottom: 1rem;
+    }
+}
+
+.modal-content {
+    border-radius: 1.5rem !important;
+}
+

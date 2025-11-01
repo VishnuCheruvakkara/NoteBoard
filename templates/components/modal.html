@@ -1,0 +1,20 @@
+
+
+<div class="modal fade" id="{{ modal_id }}" tabindex="-1" aria-labelledby="{{ modal_label_id }}" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered {{ modal_size|default:'' }}">
+        <div class="modal-content shadow-lg border-animate custom-modal-radius">
+            <div class="modal-header shadow-sm">
+                <h5 class="modal-title fw-bold text-primary" id="{{ modal_label_id }}">
+                    <i class="{{ modal_icon|default:'bi bi-journal-plus' }} me-2"></i> {{ modal_title }}
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body px-4 pb-4 background-grid">
+                {% block modal_content %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+</div>
+
