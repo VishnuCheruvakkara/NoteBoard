@@ -11,6 +11,7 @@ from users.mixins import RedirectAuthenticatedUserMixin
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import never_cache
 from notes.forms import NoteForm
+from notes.models import Note 
 
 import logging 
 
@@ -58,11 +59,13 @@ class UserLoginView(RedirectAuthenticatedUserMixin,LoginView):
 class UserLogoutView(LogoutView):
     next_page=reverse_lazy('landing_page')
 
-class DashBoardView(LoginRequiredMixin,TemplateView):
-    template_name='dashboard/dashboard.html'
-    login_url=reverse_lazy('login')
+# class DashBoardView(LoginRequiredMixin,TemplateView):
+#     template_name='dashboard/dashboard.html'
+#     login_url=reverse_lazy('login')
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['form'] = NoteForm()  #  Pass the form to template
-        return context
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context['form'] = NoteForm()  #  Pass the form to template
+#         context['notes'] = Note.active_notes.filter(user=self.request.user)
+#         return context
+

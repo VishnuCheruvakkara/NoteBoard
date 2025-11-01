@@ -1,0 +1,47 @@
+.pagination .page-item .page-link {
+    color: var(--nb-dark);
+    border: 1px solid var(--nb-gold);
+    background-color: #fff;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: var(--nb-orange);
+    color: #fff;
+    border-color: var(--nb-orange);
+    box-shadow: 0 0 6px rgba(255, 157, 0, 0.4);
+}
+
+.pagination .page-item .page-link:hover {
+    background-color: var(--nb-gold);
+    color: #fff;
+    border-color: var(--nb-gold);
+}
+
+.pagination .page-item.disabled .page-link {
+    background-color: #f8f9fa;
+    color: #b0b0b0;
+    border-color: #ddd;
+    pointer-events: none;
+}
+
+.pagination {
+    gap: 0.3rem;
+}
+
+/* Add subtle hover animation for icons */
+.pagination .page-link i {
+    transition: transform 0.2s ease;
+}
+
+.pagination .page-link:hover i {
+    transform: translateX(2px);
+}
+
+/* 🔸 Remove blue focus outline */
+.pagination .page-link:focus,
+.pagination .page-item.active .page-link:focus {
+    outline: none;
+    box-shadow: none;
+}

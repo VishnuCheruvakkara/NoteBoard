@@ -1,10 +1,10 @@
 from django.shortcuts import render
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView 
+from django.views.generic import ListView, CreateView, DetailView, UpdateView 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from notes.models import Note 
 from notes.forms import NoteForm 
-
+from django.db.models import Q
 # Create your views here.
 class NoteCreateView(LoginRequiredMixin, CreateView):
     model= Note 
@@ -16,3 +16,44 @@ class NoteCreateView(LoginRequiredMixin, CreateView):
         form.instance.user=self.request.user 
         return super().form_valid(form)
     
+class NoteListView(LoginRequiredMixin, ListView):
+    model = Note
+    template_name = 'dashboard/dashboard.html'
+    context_object_name = 'notes'
+    paginate_by = 8
+    login_url = reverse_lazy('login')
+
+    def get_queryset(self):
+        qs = Note.active_notes.filter(user=self.request.user)
+        query = self.request.GET.get('q', '')
+        if query:
+            qs = qs.filter(Q(title__icontains=query) | Q(content__icontains=query))
+        return qs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = NoteForm()  # for the modal form
+        return context
+
+class NoteDetailView(LoginRequiredMixin, DetailView):
+    model=Note 
+    template_name='dashboard/partials/note_detail.html'
+    context_object_name = 'note'
+    login_url = reverse_lazy('login')
+
+    def get_queryset(self):
+        return Note.active_notes.filter(user=self.request.user)
+    
+class NoteUpdateView(LoginRequiredMixin, UpdateView):
+    model = Note
+    form_class = NoteForm
+    template_name = 'components/modal.html'  # we’ll reuse the same modal
+    login_url = reverse_lazy('login')
+
+    def get_queryset(self):
+        # Ensure user can only edit their own notes
+        return Note.active_notes.filter(user=self.request.user)
+
+    def get_success_url(self):
+        # After editing, return to note detail page or list
+        return reverse_lazy('detail', kwargs={'pk': self.object.pk})
