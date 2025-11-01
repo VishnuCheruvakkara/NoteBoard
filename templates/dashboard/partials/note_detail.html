@@ -3,8 +3,13 @@
 
 {% block title %}{{ note.title }} | Note Details{% endblock %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/modal.css' %}">
+<link rel="stylesheet" href="{% static 'css/pagination.css' %}">
+{% endblock %}
+
 {% block content %}
-<section class="py-5 bg-light background-grid">
+<section class="min-vh-100 d-flex align-items-center justify-content-center py-5 bg-light background-grid">
     <div class="container">
         <div class="card shadow border-0 p-4">
             <div class="card-body">
@@ -21,10 +26,16 @@
                     <a href="{% url 'list' %}" class="btn btn-outline-secondary">
                         <i class="bi bi-arrow-left"></i> Back to Notes
                     </a>
-                    <!-- Edit Button that opens the modal -->
-                    <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#noteModal">
-                        <i class="bi bi-pencil"></i> Edit Note
-                    </button>
+                    <div>
+                        <!-- Delete Button -->
+                        <button class="btn btn-outline-danger me-2" data-bs-toggle="modal" data-bs-target="#deleteNoteModal">
+                            <i class="bi bi-trash"></i> Delete Note
+                        </button>
+                        <!-- Edit Button that opens the modal -->
+                        <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#noteModal">
+                            <i class="bi bi-pencil"></i> Edit Note
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -34,4 +45,32 @@
 <!-- Edit Note Modal -->
 {% url 'edit' note.pk as edit_url %}
 {% include 'dashboard/partials/common-modal.html' with modal_id="noteModal" modal_label_id="noteModalLabel" modal_title="Edit Note" modal_icon="bi bi-pencil" form_action=edit_url form_id="editNoteForm" submit_text="Update Note" submit_icon="bi bi-check-lg" form=form %}
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteNoteModal" tabindex="-1" aria-labelledby="deleteNoteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-danger" id="deleteNoteModalLabel">
+                    <i class="bi bi-exclamation-triangle me-2"></i>Delete Note
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete this note?</p>
+                <p class="fw-bold">"{{ note.title }}"</p>
+                <p class="text-muted small">This action cannot be undone.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <form method="post" action="{% url 'delete' note.pk %}" class="d-inline">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">
+                        <i class="bi bi-trash me-2"></i> Delete
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

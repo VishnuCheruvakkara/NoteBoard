@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from django.views.generic import ListView, CreateView, DetailView, UpdateView 
+from django.shortcuts import render,redirect
+from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from notes.models import Note 
@@ -69,3 +69,19 @@ class NoteUpdateView(LoginRequiredMixin, UpdateView):
         # Ensure the note object is available in context
         context['note'] = self.object
         return context
+
+
+class NoteDeleteView(LoginRequiredMixin, DeleteView):
+    model = Note
+    success_url = reverse_lazy('list')
+    login_url = reverse_lazy('login')
+
+    def get_queryset(self):
+        return Note.active_notes.filter(user=self.request.user)
+
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        # Soft delete instead of actual deletion
+        self.object.is_deleted = True
+        self.object.save()
+        return redirect(self.success_url)
