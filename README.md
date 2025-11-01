@@ -2,6 +2,10 @@
 
 A sleek, responsive notes management web application built with Django and Bootstrap 5. Create, edit, and organize your notes with ease using this modern web app.
 
+<p align="center">
+  <img src="./assets/image.png" alt="ChatUp home page" width="100%" style="border-radius: 16px;" />
+</p>
+
 ![Django](https://img.shields.io/badge/Django-5.2.7-green)
 ![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3.2-purple)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-blue)
