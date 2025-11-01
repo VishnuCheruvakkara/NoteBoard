@@ -3,25 +3,40 @@
 
 {% block title %}Dashboard | NoteBoard{% endblock %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/modal.css' %}">
+{% endblock %}
+
 {% block content %}
-<section class="min-vh-100 py-5 nb-gradient-bg d-flex align-items-center justify-content-center">
+<section class="min-vh-100 d-flex flex-column justify-content-center background-grid py-5">
     <div class="container text-center">
-        <div class="card border-0 shadow-lg p-4 rounded-4 border-animate">
-            <h2 class="fw-bold text-primary mb-3">Welcome, {{ user.username }} 👋</h2>
-            <p class="text-muted mb-4">You’re now logged in to your NoteBoard dashboard.</p>
+        <div class="row align-items-center mb-5">
+            <div class="col-md-6 mb-4 mb-md-0 text-center text-xl-start">
+                <h1 class="display-5 fw-bold text-primary">Welcome, {{ user.username }}...</h1>
+                <p class="lead text-muted mb-4">
+                    Manage your notes easily. create, edit, and organize your thoughts in one place.
+                </p>
 
-            <div class="d-flex flex-column flex-md-row justify-content-center gap-3">
-                <a href="#" class="btn btn-primary btn-lg">Create a New Note</a>
-                <a href="#" class="btn btn-outline-primary btn-lg">View My Notes</a>
-                {% if user.is_authenticated %}
-                <form action="{% url 'logout' %}" method="post" class="d-inline">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-outline-danger btn-sm">Logout</button>
-                </form>
-                {% endif %}
+                <div class="d-flex flex-column flex-xl-row align-items-center">
+                    <!-- Create New Note Button that triggers Modal -->
+                    <button class="btn btn-primary btn-lg px-4 mb-3 mb-xl-0 me-xl-3" 
+                            data-bs-toggle="modal" 
+                            data-bs-target="#createNoteModal">
+                        <i class="bi bi-plus-circle me-2"></i> Create New Note
+                    </button>
+                </div>
+            </div>
 
+            <div class="col-md-6 text-center">
+                <img src="{% static 'images/hero_dashboard.svg' %}" class="img-fluid" alt="NoteBoard illustration">
             </div>
         </div>
+
+        <!-- Include Notes Section -->
+        {% include 'dashboard/partials/notes-section.html' %}
     </div>
 </section>
+
+<!-- Reusable Modal -->
+{% include 'dashboard/partials/create-note-modal.html' with modal_id="createNoteModal" modal_label_id="createNoteModalLabel" modal_title="New Note" modal_icon="bi bi-journal-plus" %}
 {% endblock %}

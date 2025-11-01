@@ -1,0 +1,52 @@
+<!-- Notes Section -->
+<div class="notes-section">
+    <!-- Search Bar -->
+    <div class="row justify-content-center mb-4">
+        <div class="col-md-6">
+            <form class="d-flex">
+                <input class="form-control form-control-lg me-2" type="search" placeholder="Search your notes..." aria-label="Search">
+                <button class="btn btn-outline-primary btn-lg" type="submit">
+                    <i class="bi bi-search"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Notes Cards -->
+    <div class="row g-4">
+        {% comment %} Dummy 6 Notes {% endcomment %}
+        {% for i in "123456" %}
+        <div class="col-lg-3 col-md-6 col-12">
+            <div class="card shadow-sm border-0 h-100 note-card">
+                <div class="card-body text-start border-animate">
+                    <h5 class="card-title fw-bold text-primary">Note Title {{ forloop.counter }}</h5>
+                    <p class="card-text text-muted">
+                        This is a short preview of note {{ forloop.counter }} content. Keep your ideas organized and easy to find.
+                    </p>
+                    <div class="d-flex justify-content-between mt-3">
+                        <a href="#" class="text-decoration-none text-primary fw-semibold">
+                            View <i class="bi bi-arrow-right"></i>
+                        </a>
+                        <small class="text-muted">Nov 1, 2025</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Pagination -->
+    <nav aria-label="Notes Pagination" class="mt-5">
+        <ul class="pagination justify-content-center">
+            <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1"><i class="bi bi-chevron-left"></i></a>
+            </li>
+            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#"><i class="bi bi-chevron-right"></i></a>
+            </li>
+        </ul>
+    </nav>
+</div>
