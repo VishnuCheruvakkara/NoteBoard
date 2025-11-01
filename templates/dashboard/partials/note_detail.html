@@ -5,7 +5,7 @@
 
 {% block content %}
 <section class="py-5 bg-light background-grid">
-    <div class="container ">
+    <div class="container">
         <div class="card shadow border-0 p-4">
             <div class="card-body">
                 <h2 class="fw-bold text-primary mb-3">{{ note.title }}</h2>
@@ -22,8 +22,7 @@
                         <i class="bi bi-arrow-left"></i> Back to Notes
                     </a>
                     <!-- Edit Button that opens the modal -->
-                    <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#noteModal"
-                        data-url="{% url 'edit' note.pk %}">
+                    <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#noteModal">
                         <i class="bi bi-pencil"></i> Edit Note
                     </button>
                 </div>
@@ -31,4 +30,8 @@
         </div>
     </div>
 </section>
+
+<!-- Edit Note Modal -->
+{% url 'edit' note.pk as edit_url %}
+{% include 'dashboard/partials/common-modal.html' with modal_id="noteModal" modal_label_id="noteModalLabel" modal_title="Edit Note" modal_icon="bi bi-pencil" form_action=edit_url form_id="editNoteForm" submit_text="Update Note" submit_icon="bi bi-check-lg" form=form %}
 {% endblock %}

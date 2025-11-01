@@ -1,7 +1,7 @@
 {% extends 'components/modal.html' %}
 
 {% block modal_content %}
-<form method="post" action="{% url 'create' %}" id="createNoteForm" novalidate>
+<form method="post" action="{{ form_action }}" id="{{ form_id }}" novalidate>
   {% csrf_token %}
 
   {% for field in form %}
@@ -19,7 +19,7 @@
   <div class="text-end">
     <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Cancel</button>
     <button type="submit" class="btn btn-primary">
-      <i class="bi bi-save me-2"></i> Save Note
+      <i class="bi bi-save me-2 {{ submit_icon }}"></i> {{ submit_text }}
     </button>
   </div>
 </form>

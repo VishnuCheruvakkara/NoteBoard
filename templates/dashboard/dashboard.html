@@ -39,5 +39,6 @@
 </section>
 
 <!-- Reusable Modal -->
-{% include 'dashboard/partials/create-note-modal.html' with modal_id="createNoteModal" modal_label_id="createNoteModalLabel" modal_title="New Note" modal_icon="bi bi-journal-plus" %}
+{% url 'create' as create_url %}{% include 'dashboard/partials/common-modal.html' with modal_id="createNoteModal" modal_label_id="createNoteModalLabel" modal_title="New Note" modal_icon="bi bi-journal-plus" form_action=create_url form_id="createNoteForm" submit_text="Save Note" submit_icon="bi bi-save" %}
+
 {% endblock %}

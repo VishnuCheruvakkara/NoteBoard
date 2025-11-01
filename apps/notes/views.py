@@ -44,6 +44,12 @@ class NoteDetailView(LoginRequiredMixin, DetailView):
     def get_queryset(self):
         return Note.active_notes.filter(user=self.request.user)
     
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Add the form pre-populated with the note instance
+        context['form'] = NoteForm(instance=self.object)
+        return context
+    
 class NoteUpdateView(LoginRequiredMixin, UpdateView):
     model = Note
     form_class = NoteForm
@@ -57,3 +63,9 @@ class NoteUpdateView(LoginRequiredMixin, UpdateView):
     def get_success_url(self):
         # After editing, return to note detail page or list
         return reverse_lazy('detail', kwargs={'pk': self.object.pk})
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Ensure the note object is available in context
+        context['note'] = self.object
+        return context
