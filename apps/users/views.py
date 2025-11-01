@@ -10,7 +10,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from users.mixins import RedirectAuthenticatedUserMixin
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import never_cache
-
+from notes.forms import NoteForm
 
 import logging 
 
@@ -18,7 +18,6 @@ logger = logging.getLogger(__name__)
 
 # Create your views here.
 @method_decorator(never_cache, name='dispatch')
-
 class LandingPageView(RedirectAuthenticatedUserMixin,TemplateView):
     template_name='landing/landing.html'
 
@@ -40,7 +39,6 @@ class UserRegisterView(RedirectAuthenticatedUserMixin,CreateView):
         return super().form_invalid(form)
 
 @method_decorator(never_cache, name='dispatch')
-
 class UserLoginView(RedirectAuthenticatedUserMixin,LoginView):
     template_name='users/login.html'
     form_class=LoginForm
@@ -63,3 +61,8 @@ class UserLogoutView(LogoutView):
 class DashBoardView(LoginRequiredMixin,TemplateView):
     template_name='dashboard/dashboard.html'
     login_url=reverse_lazy('login')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = NoteForm()  #  Pass the form to template
+        return context
