@@ -59,13 +59,7 @@ class UserLoginView(RedirectAuthenticatedUserMixin,LoginView):
 class UserLogoutView(LogoutView):
     next_page=reverse_lazy('landing_page')
 
-# class DashBoardView(LoginRequiredMixin,TemplateView):
-#     template_name='dashboard/dashboard.html'
-#     login_url=reverse_lazy('login')
-
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['form'] = NoteForm()  #  Pass the form to template
-#         context['notes'] = Note.active_notes.filter(user=self.request.user)
-#         return context
+    def dispatch(self, request, *args, **kwargs):
+        messages.success(request, "You have been logged out successfully!")
+        return super().dispatch(request, *args, **kwargs)
 
